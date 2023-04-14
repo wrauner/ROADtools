@@ -40,8 +40,8 @@ class SeleniumAuthentication():
         if self.proxy:
             options = {
                 'proxy': {
-                    'http': f'http://{self.proxy}',
-                    'https': f'https://{self.proxy}',
+                    'http': self.proxy,
+                    'https': self.proxy,
                     'no_proxy': 'localhost,127.0.0.1'
                 }
             }

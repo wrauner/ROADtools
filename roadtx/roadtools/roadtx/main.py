@@ -323,6 +323,9 @@ def main():
     browserprtauth_parser.add_argument('--capture-code',
                                        action='store_true',
                                        help='Do not attempt to redeem any authentication code but print it instead')
+    browserprtauth_parser.add_argument('--proxy',
+                                       action='store',
+                                       help='Proxy to use with the browser (HTTP and HTTPS protocols), e.g. socks://proxy:port or http://proxy:port')
 
     # Interactive auth using Selenium - inject PRT to other user
     injauth_parser = subparsers.add_parser('browserprtinject', help='Selenium based auth with automatic PRT injection. Can be used with other users to add device state to session')
@@ -586,7 +589,7 @@ def main():
         else:
             print('You must either supply a PRT and session key on the command line or a file that contains them')
             return
-        selauth = SeleniumAuthentication(auth, deviceauth, args.redirect_url)
+        selauth = SeleniumAuthentication(auth, deviceauth, args.redirect_url, proxy=args.proxy)
         if args.auth_url:
             url = args.auth_url
         else:
